@@ -1,0 +1,931 @@
+/* =========================================================================
+   1. නූතන ප්‍රිමියම් වර්ණ සහ Variables සැකසීම (Modern Premium Minimalist)
+   ========================================================================= */
+/* =========================================================================
+   1. ශාලින්ද තෝරාගත් වර්ණ සංකලනය (Vibrant Modern Palette)
+   ========================================================================= */
+:root {
+    --bg-color: #C4E2F5;          /* 🩵 පසුබිමට ඔයා කියපු ලස්සන ලා නිල් පැහැය */
+    --text-color: #1a0933;        /* කියවන්න පහසු ඉතා තද දම්/කළු පැහැය */
+    
+    --accent-color: #792CA2;      /* 💜 ප්‍රධාන වර්ණය: ගැඹුරු දම් පැහැය (Logo/Active) */
+    --accent-hover: #C13383;      /* 🩷 මවුස් එක ගෙන යන විට මාරු වන තද රෝස පැහැය */
+    
+    --card-bg: #E8EDF2;           /* කවි කාඩ්පත් සඳහා පිරිසිදු සුදු පැහැය */
+    --card-shadow: 0 10px 30px rgba(121, 44, 162, 0.06); /* සියුම් දම් පැහැති සෙවනැල්ලක් */
+    --card-hover-shadow: 0 20px 40px rgba(193, 51, 131, 0.15); /* Hover වීමේදී රෝස පැහැති සෙවනැල්ල */
+    --border-color: #aed3ec;      /* පසුබිමට ගැළපෙන සියුම් දාර වර්ණය */
+    --hero-bg: #b5daf1;           /* Hero section එක සඳහා තවත් මෘදු නිල් පැහැයක් */
+    
+    /* 📸 Hero section එකේ පින්තූරය උඩින් වැටෙන Light mode overlay එක */
+    --hero-gradient-start: rgba(196, 226, 245, 0.82); 
+    --hero-gradient-end: rgba(255, 255, 255, 0.92);
+}
+
+/* Dark Mode සඳහා වර්ණ සංකලනය (මේ වර්ණ වලටම ගැළපෙන ලෙස සකසා ඇත) */
+body.dark-theme {
+    --bg-color: #0b0514;          /* ඉතාමත් ගැඹුරු තද දම්/කළු පසුබිම */
+    --text-color: #f3ebfa;        /* ලා දම්/සුදු පැහැති අකුරු */
+    
+    --accent-color: #ba82ea;      /* Dark mode එකේදී කැපී පෙනෙන ලා දම් පැහැය */
+    --accent-hover: #e56ea8;      /* ලා රෝස පැහැය */
+    
+    --card-bg: #150d22;           /* තද දම් පැහැති කාඩ්පත් */
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --card-hover-shadow: 0 20px 40px rgba(193, 51, 131, 0.1);
+    --border-color: #27163c;
+    --hero-bg: #0e061b;
+    
+    /* 📸 Hero section එකේ පින්තූරය උඩින් වැටෙන Dark mode overlay එක */
+    --hero-gradient-start: rgba(14, 6, 27, 0.85);   
+    --hero-gradient-end: rgba(11, 5, 20, 0.95);
+}
+/* =========================================================================
+   2. මූලික සැකසුම් සහ Animations (Global Styles)
+   ========================================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* හැම දේම සිනිදුව මාරු වීමට modern cubic-bezier transition එකක් */
+    transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                border-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body {
+    font-family: 'Abhaya Libre', serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.8;
+    font-size: 19px;
+    overflow-x: hidden;
+    animation: fadeInPage 0.8s ease-in-out;
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================================================================
+   3. ශීර්ෂකය (Header & Navigation)
+   ========================================================================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 10%;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: 0.5px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+}
+
+nav ul li a {
+    font-size: 19px;
+    font-weight: 400;
+    padding-bottom: 5px;
+    position: relative;
+}
+
+/* ලින්ක්ස් යටින් ඉරක් ඇදෙන ලස්සන ඇනිමේෂන් එක */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after, nav ul li a.active::after {
+    width: 100%;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: var(--accent-color);
+}
+
+/* Dark mode බටන් එක රවුමට කැරකෙන එක */
+.toggle-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle-btn:hover {
+    transform: rotate(360deg) scale(1.1);
+    background-color: var(--hero-bg);
+}
+
+/* =========================================================================
+   4. ප්‍රධාන Hero Section (With Background Image Option)
+   ========================================================================= */
+.hero {
+    text-align: center;
+    padding: 110px 20px;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    
+    /* 📸 images ෆෝල්ඩර් එකේ hero-bg.jpg පින්තූරය ඇත්නම් එය ලෝඩ් වේ, නැතත් overlay වර්ණ වැඩ කරයි */
+    background-image:  linear-gradient(var(--hero-gradient-start), var(--hero-gradient-end)), url('../images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.9) contrast(1.05);
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.hero h1 span {
+    background: linear-gradient(45deg, #792CA2, #C13383);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.hero p {
+    font-size: 21px;
+    max-width: 650px;
+    margin: 0 auto;
+    opacity: 0.85;
+}
+
+/* =========================================================================
+   දිනපතා වැකිය සඳහා වන නවීන මෝස්තර (Premium Glassmorphism Quote)
+   ========================================================================= */
+.daily-quote-container {
+    margin-top: 40px;
+    padding: 25px 35px;
+    border-radius: 16px;
+    display: inline-block;
+    max-width: 650px;
+    text-align: left; /* කලාත්මක පෙනුම සඳහා වැකිය වම්පසට කර ඇත */
+    position: relative;
+    
+    /* 🔮 1. Glassmorphism Effect: මීදුම් වීදුරුවක් වැනි සුපිරි පසුබිම */
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    
+    /* 💎 2. සිහින් සුදු දාරය (Glass Border) */
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    
+    /* 🎨 3. Left Border Accent: වම් පැත්තේ දම් සහ රෝස Gradient ඉර */
+    border-left: 5px solid transparent;
+    border-image: linear-gradient(to bottom, #792CA2, #C13383) 1;
+    
+    /* සියුම් සෙවනැල්ල */
+    box-shadow: 0 15px 35px rgba(121, 44, 162, 0.05);
+    
+    /* ✨ පිටුවට එද්දී සිනිදුව පාවී මතුවන ඇනිමේෂන් එක */
+    animation: premiumQuoteAppear 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+}
+
+/* Dark Mode එකේදී වීදුරු පසුබිම තද පැහැයට හැරීම */
+body.dark-theme .daily-quote-container {
+    background: rgba(21, 13, 34, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: 5px solid transparent;
+    border-image: linear-gradient(to bottom, #ba82ea, #e56ea8) 1;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* 🚀 වැකිය මතුවන ඇනිමේෂන් එක */
+@keyframes premiumQuoteAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* උඩින් තියෙන පුංචි ලේබල් එක */
+.quote-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent-hover); /* රෝස පැහැය */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+/* 📝 වැකිය ඇතුලත ඇති අකුරු (Typography & Neon Glow) */
+#daily-quote {
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-color);
+    line-height: 1.7;
+    position: relative;
+    
+    /* 👁️ Glowing Typography: අකුරු වටා සියුම් නිශාචර ආලෝකයක් දීම */
+    text-shadow: 0 2px 10px rgba(121, 44, 162, 0.05);
+}
+
+/* Dark Mode එකේදී අකුරු වල දීප්තිය (Glow) වැඩි කිරීම */
+body.dark-theme #daily-quote {
+    text-shadow: 0 0 15px rgba(186, 130, 234, 0.2);
+}
+
+/* =========================================================================
+   5. වර්ගීකරණ සහ සෙවුම් අංශ (Categories & Search Header)
+   ========================================================================= */
+.categories, .page-header {
+    text-align: center;
+    padding: 50px 20px 20px 20px;
+}
+
+.page-header h1 {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.page-header p {
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+.cat-btn {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 10px 24px;
+    margin: 6px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Abhaya Libre', serif;
+    font-size: 17px;
+    box-shadow: var(--card-shadow);
+}
+
+.cat-btn:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.cat-btn.active {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border-color: var(--accent-color);
+    box-shadow: 0 8px 20px rgba(179, 132, 89, 0.25);
+}
+
+body.dark-theme .cat-btn.active {
+    color: #0f0f11;
+    box-shadow: 0 8px 20px rgba(229, 184, 143, 0.25);
+}
+
+/* සර්ච් බාර් එක */
+.search-container {
+    margin-top: 10px;
+}
+
+.search-container input {
+    width: 100%;
+    max-width: 450px;
+    padding: 14px 24px;
+    border: 1px solid var(--border-color);
+    border-radius: 30px;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-family: 'Abhaya Libre', serif;
+    font-size: 17px;
+    outline: none;
+    box-shadow: var(--card-shadow);
+}
+
+.search-container input:focus {
+    border-color: var(--accent-color);
+    box-shadow: var(--card-hover-shadow);
+    transform: scale(1.02);
+}
+
+/* =========================================================================
+   6. කවි කාඩ්පත් සැලසුම සහ සජීවීකරණය (Poem Cards Grid)
+   ========================================================================= */
+.poem-container, .all-poems-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px 60px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+}
+
+/* =========================================================================
+   කවි කාඩ්පත් නව සැලසුම (Custom Vibrant Premium Poem Cards)
+   ========================================================================= */
+.poem-container, .all-poems-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px 60px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
+    perspective: 1000px;
+    
+    /* 👇 මේ පේළිය අලුතින්ම එකතු කරන්න. එතකොට එක කාඩ් එකක් ලොකු වුණත් අනිත් කාඩ් ලයින් එකෙන් පිට පනින්නේ නැහැ */
+    align-items: start; 
+}
+
+
+/* =========================================================================
+   කවි කාඩ්පත් නව සැලසුම (Read More පහසුකම සහිතව)
+   ========================================================================= */
+.poem-card {
+    background-color: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    
+    /* 📐 උස ස්වයංක්‍රීයව හැඩගැසීමට ඉඩ දී ඇත */
+    height: auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    animation: cardSmoothAppear 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.poem-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
+}
+
+/* 📜 කවිය මුලින් පේළි කිහිපයකට සීමා කරන කොටස */
+.poem-content-wrapper {
+    max-height: 200px; /* 👈 160px වෙනුවට 200px දාන්න. එතකොට 3වැනි කවියත් ලස්සනට කොටු වේවි */
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+/* කවිය මුලින් යටින් මඳක් මැකී යනවා වැනි (Fade out) පෙනුමක් දීමට */
+.poem-content-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(transparent, var(--card-bg));
+    transition: opacity 0.3s ease;
+}
+
+.poem-content {
+    font-size: 19px;
+    white-space: pre-line;
+    font-style: italic;
+    opacity: 0.95;
+    margin: 0;
+}
+
+/* ❌ කාඩ්පත දිග හැරුණු පසු (Expanded) සිදුවන වෙනස්කම් */
+.poem-card.expanded .poem-content-wrapper {
+    max-height: 1000px; /* කවිය සම්පූර්ණයෙන් පෙනීමට උස වැඩි කිරීම */
+}
+
+.poem-card.expanded .poem-content-wrapper::after {
+    opacity: 0; /* කවිය දිග හැරුණු පසු මැකී යන පෙනුම ඉවත් කිරීම */
+    pointer-events: none;
+}
+
+/* =========================================================================
+   කවි කාඩ්පත් බටන් පද්ධතිය (Like, Copy, Share Menu)
+   ========================================================================= */
+.like-section {
+    width: 100%;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px; /* බටන් අතර පරතරය */
+}
+
+/* පොදු බටන් හැඩගැන්වීම */
+.action-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+}
+
+.action-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* ❤️ Like Button එක */
+.like-btn.liked {
+    color: #e74c3c;
+    border-color: #e74c3c;
+    animation: heartBeat 0.3s ease-in-out;
+}
+
+/* 🔗 Share Menu එක (B ක්‍රමය - Hover Logic) */
+.share-menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.share-options {
+    position: absolute;
+    bottom: 50px; /* බටන් එකට උඩින් මතුවීමට */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    display: flex;
+    gap: 10px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 6px 10px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    opacity: 0;
+    pointer-events: none; /* සාමාන්‍ය වෙලාවට click කල නොහැක */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 🚀 Share බටන් එක උඩට මවුස් එක ගෙන ගිය විට WhatsApp/FB අයිකන මතුවීම */
+.share-menu-container:hover .share-options {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Share අයිකන වල මෝස්තර */
+.share-options a {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #ffffff;
+    transition: transform 0.2s ease;
+}
+
+.share-options a:hover {
+    transform: scale(1.15);
+}
+
+.share-whatsapp { background-color: #25D366; }
+.share-facebook { background-color: #1877F2; }
+
+/* 🔗 Read More බටන් එකේ මෝස්තරය (දම් සහ රෝස තේමාවට අනුව) */
+.read-more-btn {
+    background: none;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    font-family: 'Abhaya Libre', serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.read-more-btn:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border-color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+/* Like Section එක පහළටම තල්ලු කිරීම */
+.like-section {
+    width: 100%;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+/* 🚀 1. පිටුව ලෝඩ් වෙද්දී කවි කාඩ්පත් මතුවන නව ඇනිමේෂන් එක */
+@keyframes cardSmoothAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) rotateX(-10deg);
+        filter: blur(5px); /* මුලින් මඳක් නොපැහැදිලිව තිබී මතුවීමට */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0);
+        filter: blur(0);
+    }
+}
+
+/* 🎨 2. මවුස් එක ගෙන යන විට (Hover) සිදුවන සුපිරි වෙනස්කම් */
+.poem-card:hover {
+    transform: translateY(-12px) scale(1.02); /* උඩට පාවී මඳක් ලොකු වීම */
+    border-color: var(--accent-hover); /* දාරය තද රෝස (#C13383) පැහැයට හැරීම */
+    
+    /* 🔮 ඔයාගේ දම් සහ රෝස වර්ණ එකතු කර සාදන ලද සුපිරි Neon Glow සෙවනැල්ල */
+    box-shadow: 0 20px 40px rgba(121, 44, 162, 0.15), 
+                0 0 25px rgba(193, 51, 131, 0.1); 
+}
+
+/* 🪄 3. කාඩ්පත ඇතුළතින් ලස්සන වර්ණ තීරුවක් (Top Border Accent) ඇතුළත් කිරීම */
+.poem-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-hover)); /* දම් සහ රෝස Gradient එකක් */
+    transition: transform 0.4s ease;
+    transform: scaleX(0.3); /* සාමාන්‍ය වෙලාවට කුඩාවට පවතී */
+    transform-origin: center;
+}
+
+.poem-card:hover::before {
+    transform: scaleX(1); /* Hover කළ විට මුළු කාඩ්පත පුරාම ඉර දිග හැරේ */
+}
+
+/* 📝 4. කාඩ්පත ඇතුළත තියෙන Tag එකේ වෙනස්කම් */
+.poem-tag {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--accent-color); /* දම් පැහැය */
+    background-color: rgba(121, 44, 162, 0.06); /* ඉතා ලා දම් පසුබිමක් */
+    letter-spacing: 1px;
+    margin-bottom: 22px;
+    display: inline-block;
+    border: 1px solid var(--accent-color);
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.poem-card:hover .poem-tag {
+    background-color: var(--accent-hover); /* Hover කළ විට රෝස පැහැයට හැරේ */
+    color: #ffffff;
+    border-color: var(--accent-hover);
+}
+
+/* 🏷️ 5. මාතෘකාව (Title) Hover කිරීමේදී සිදුවන ඇනිමේෂන් එක */
+.poem-card h3 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.poem-card:hover h3 {
+    color: var(--accent-color); /* දම් පැහැයට හැරීම */
+}
+
+.poem-tag {
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: 1px solid var(--accent-color);
+    padding: 3px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.poem-card h3 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.poem-content {
+    font-size: 19px;
+    white-space: pre-line; 
+    margin-bottom: 25px;
+    font-style: italic;
+    opacity: 0.95;
+}
+
+/* මනාප (Like) බොත්තම */
+.like-section {
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    color: var(--text-color);
+    font-family: 'Abhaya Libre', serif;
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+
+.like-btn:hover {
+    background-color: var(--hero-bg);
+    transform: scale(1.05);
+}
+
+.like-btn.liked {
+    color: #e74c3c;
+    font-weight: bold;
+    animation: heartBeat 0.3s ease-in-out;
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
+/* =========================================================================
+   7. මා ගැන පිටුව (About Page Styles)
+   ========================================================================= */
+.about-container {
+    max-width: 950px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.about-wrapper {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+.about-image-section {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid var(--border-color);
+    padding-right: 50px;
+}
+
+.profile-img {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent-color);
+    margin-bottom: 20px;
+    box-shadow: var(--card-shadow);
+}
+
+.profile-img:hover {
+    transform: scale(1.03);
+}
+
+.about-image-section h2 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.subtitle {
+    font-size: 16px;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+.about-text-section {
+    flex: 2;
+}
+
+.about-text-section h3 {
+    font-size: 32px;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.about-text-section p {
+    font-size: 19px;
+    margin-bottom: 20px;
+    text-align: justify;
+    opacity: 0.9;
+}
+
+.social-links {
+    margin-top: 30px;
+}
+
+.social-links h4 {
+    font-size: 17px;
+    margin-bottom: 12px;
+    opacity: 0.8;
+}
+
+.social-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    border-radius: 20px;
+    font-size: 15px;
+    margin-right: 12px;
+}
+
+.social-btn:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(179, 132, 89, 0.2);
+}
+
+body.dark-theme .social-btn:hover {
+    color: #0f0f11;
+}
+
+/* Loading සහ හිස් අවස්ථා */
+.loading, .no-poems {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 50px;
+    opacity: 0.7;
+    font-size: 20px;
+}
+
+/* =========================================================================
+   8. පාදකය (Footer)
+   ========================================================================= */
+footer {
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 80px;
+    border-top: 1px solid var(--border-color);
+    font-size: 17px;
+    opacity: 0.85;
+    background-color: var(--hero-bg);
+}
+
+/* =========================================================================
+   9. ජංගම දුරකථන සඳහා හැඩගැස්වීම (Responsive Design)
+   ========================================================================= */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+    
+    nav ul {
+        gap: 25px;
+    }
+    
+    .hero h1 {
+        font-size: 36px;
+    }
+    
+    .about-wrapper {
+        flex-direction: column;
+        padding: 30px;
+        gap: 40px;
+    }
+    
+    .about-image-section {
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 30px;
+        width: 100%;
+    }
+    
+    .poem-container, .all-poems-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================================================================
+   8. නවීන සහ ආකර්ෂණීය පාදකය (Modern Premium Footer)
+   ========================================================================= */
+/* =========================================================================
+   8. සරල සහ නිවැරදි කළ පාදකය (Compact Centered Footer)
+   ========================================================================= */
+footer {
+    background-color: var(--hero-bg); /* මෘදු පසුබිම් වර්ණය */
+    border-top: 2px solid var(--border-color);
+    padding: 40px 20px; /* උස සහ හිස්තැන් සැලකිය යුතු ලෙස අඩු කර ඇත */
+    margin-top: 80px;
+    text-align: center; /* හැමදේම මැදට කිරීමට */
+}
+
+.footer-compact-content {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* අයිතම අතර පරතරය ඉතාමත් පිළිවෙළකට සකසා ඇත */
+}
+
+.footer-logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* 🌐 අයිකන ටික ලස්සනට මැදින් තැබීම */
+.social-icons-wrapper {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.social-icons-wrapper a {
+    width: 42px;
+    height: 42px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 🚀 Hover Animations (කලින් තිබූ ලස්සන සිනිදු ඇනිමේෂන් එකම වේ) */
+.social-icons-wrapper a:hover {
+    transform: translateY(-4px) scale(1.08);
+    color: #ffffff;
+    box-shadow: 0 8px 15px rgba(121, 44, 162, 0.12);
+}
+
+.social-icons-wrapper a.ico-fb:hover { background-color: #3b5998; border-color: #3b5998; }
+.social-icons-wrapper a.ico-yt:hover { background-color: #cd201f; border-color: #cd201f; }
+.social-icons-wrapper a.ico-gh:hover { background-color: var(--accent-color); border-color: var(--accent-color); }
+.social-icons-wrapper a.ico-ig:hover { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); border-color: #dc2743; }
+.social-icons-wrapper a.ico-in:hover { background-color: #3b5998; border-color: #3b5998; }
+
+/* කොපිරයිට් වැකිය */
+.footer-credits {
+    font-size: 15px;
+    opacity: 0.75;
+    margin: 0;
+}
