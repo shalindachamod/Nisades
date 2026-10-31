@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>සියලුම නිසඳැස් නිර්මාණ | My Nisades Collection</title>
+    
+    <!-- Google Fonts සබැඳිය -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Transform:wght@400;700&family=Abhaya+Libre:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS ෆයිල් එක සම්බන්ධ කිරීම -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ශීර්ෂකය (Header & Navigation) -->
+    <header>
+        <div class="logo">නිසඳැස් සිතුවිලි</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="poemS.html" class="active">All Poems</a></li>
+            </ul>
+        </nav>
+        <button id="theme-toggle" class="toggle-btn">🌙</button>
+    </header>
+
+    <!-- පිටුවේ ප්‍රධාන මාතෘකාව සහ සර්ච් බාර් එක (Search & Filter Section) -->
+    <section class="page-header">
+        <h1>නිසඳැස් එකතුව</h1>
+        <p>හිතේ උපදින සිතුවිලි අකුරු කළ නිසඳැස් එකතුව මෙතැනින් කියවන්න.</p>
+        
+        <!-- සර්ච් බාර් එක (JS වලින් ක්‍රියාත්මක කිරීමට) -->
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search Poems..." onkeyup="searchPoems()">
+        </div>
+    </section>
+
+    <!-- සියලුම කවි දර්ශනය වන කොටස (Grid Layout) -->
+    <main class="all-poems-grid" id="all-poems-display">
+        <!-- JavaScript මඟින් ඔයාගේ ඔක්කොම කවි ටික loop එකක් හරහා මෙතැනට load කරනු ලබයි -->
+        <div class="loading">නිර්මාණ එකතුව ලෝඩ් වෙමින් පවතී...</div>
+    </main>
+
+    <!-- පාදකය (Footer) -->
+    <footer>
+        <p>&copy; 2026 නිසඳැස් සිතුවිලි. Shalinda Chamod</p>
+    </footer>
+
+    <!-- JavaScript ෆයිල් සම්බන්ධ කිරීම -->
+    <script src="js/poems-data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

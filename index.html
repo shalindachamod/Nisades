@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>නිසඳැස් සිතුවිලි</title>
+    
+    <!-- Google Fonts සබැඳිය (සිංහල අකුරු ලස්සනට පෙනීමට) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- CSS ෆයිල් එක සම්බන්ධ කිරීම -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ශීර්ෂකය (Header & Navigation) -->
+    <header>
+        <div class="logo">නිසඳැස් සිතුවිලි</div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="poemS.html">All Poems</a></li>
+            </ul>
+        </nav>
+        <!-- Dark Mode Toggle බටන් එක (JS වලින් පාලනය කිරීමට) -->
+        <button id="theme-toggle" class="toggle-btn">🌙</button>
+    </header>
+
+    <!-- ප්‍රධාන හඳුන්වාදීමේ කොටස (Hero Section) -->
+    <section class="hero">
+        <h1>නිදහස් සිතිවිලි අතර ලියැවුණු, <br><span>නිසඳැස් සිතුවිලි...</span></h1>
+        <p>හදකින් හදක් කියවන හදකට හදක් හමුවන ඉසව්ව</p>
+
+        <div class="daily-quote-container">
+            <span class="quote-label">Today's Quote</span>
+            <blockquote id="daily-quote">"සිතුවිලි සිනිදුව ලෝඩ් වෙමින් පවතී..."</blockquote>
+        </div>
+    </section>
+
+    <!-- නිසඳැස් වර්ගීකරණය (Categories) -->
+    <section class="categories">
+        <button class="cat-btn active" onclick="filterPoems('all')" style="color: black;">Alll</button>
+        <button class="cat-btn" onclick="filterPoems('love')">Love</button>
+        <button class="cat-btn" onclick="filterPoems('life')">Life</button>
+    </section>
+
+    <!-- නිසඳැස් කවි දර්ශනය වන කොටස (Poem Container) -->
+    <main class="poem-container" id="poem-display">
+        <!-- JavaScript මඟින් කවි dynamic ලෙස මෙතැනට එකතු කරනු ලබයි -->
+        <div class="loading">කවි ලෝඩ් වෙමින් පවතී...</div>
+    </main>
+
+    <!-- පාදකය (Footer) -->
+    <footer>
+    <div class="footer-container">
+        <div class="footer-info">
+            <h3 class="footer-logo">නිසඳැස් සිතුවිලි</h3>
+            <p>නිදහස් සිතිවිලි අතර ලියැවුණු නිසඳැස් සිතුවිලි...</p>
+        </div>
+        
+        <div class="footer-socials">
+            <h4>Contact me</h4>
+            <div class="social-icons-wrapper">
+                <a href="https://web.facebook.com/shalinda.chamod.2025" target="_blank" class="ico-fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://youtube.com" target="_blank" class="ico-yt" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/shalindachamod" target="_blank" class="ico-gh" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://instagram.com" target="_blank" class="ico-ig" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/shalinda-chamod-452a23385/" target="_blank" class="ico-in" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; Shalinda Chamod 2026  All rights reserved.</p>
+    </div>
+</footer>
+
+    <!-- JavaScript ෆයිල් සම්බන්ධ කිරීම -->
+    <script src="js/poems-data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</body>
+</html>
